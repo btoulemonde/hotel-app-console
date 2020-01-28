@@ -12,10 +12,10 @@ function startMenu() {
         99. Quitter
         `;
        console.log(menu);
-    rl.question( function (saisie) {
+    rl.question(menu, function (saisie) {
         
         console.log(`Vous avez saisi : ${saisie}`);
-        startMenu();
+
         switch (saisie) {
             case '1':
                 console.log('>> Liste des clients');
