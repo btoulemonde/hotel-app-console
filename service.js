@@ -7,7 +7,7 @@ function listerClients(callBack) {
         callBack(data);
     });
 }
-function ajouterClient(nom, prenom) {
+function ajouterClient(nom,prenom) {
     
     request.post(
         'https://btoulemonde-hotel-app.herokuapp.com/clients',
@@ -23,9 +23,18 @@ function ajouterClient(nom, prenom) {
             }
             console.log(`statusCode: ${res.statusCode}`)
             console.log(body)
+            
         });
     
 }
 
+function chercherNom(nom,callBack){
+    request('https://btoulemonde-hotel-app.herokuapp.com/clients?nom='+nom, { json: true }, function (err, res, data) {
+
+        callBack(data);
+    });
+}
+
 exports.ajouterClient = ajouterClient;
 exports.listerClients = listerClients;
+exports.chercherNom = chercherNom;

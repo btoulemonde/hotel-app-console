@@ -4,19 +4,13 @@ var rl = readline.createInterface({
     input: process.stdin,
     outpt: process.stdout
 });
-var rl2 = readline.createInterface({
-    input: process.stdin,
-    outpt: process.stdout
-});
-var rl3 = readline.createInterface({
-    input: process.stdin,
-    outpt: process.stdout
-});
+
 
 function startMenu() {
     var menu = `
         1. Liste des clients
         2. Ajouter un client
+        3. chercher par nom
         99. Quitter
         `;
     console.log(menu);
@@ -37,16 +31,28 @@ function startMenu() {
 
                 break;
             case '2':
-                rl2.question("Saisir un nom", function(saisie1){
-                    rl3.question("Saisir un prenom", function(saisie2){
-                        var nom = saisie1;
-                        var prenom = saisie2;
-                        service.ajouterClient(nom, prenom);
+                rl.question("Saisissez un nom : ", function (saisie1) {
+                    rl.question("Saisissez un prenom : ", function (saisie2) {
+
+                        service.ajouterClient(saisie1, saisie2, function (ajouter) {
+                            console.log(ajouter);
+                            startMenu();
+                        });
                     });
-                  
-                })
-                
-                
+
+                });
+                break;
+            case '3':
+                rl.question("Saisissez un nom : ", function (nom) {
+                    service.chercherNom(nom, function (data) {
+
+                        data.forEach(function (client) {
+                            console.log(client.nom + " " + client.prenoms);
+                        });
+                        startMenu();
+                    });
+
+                });
                 break;
             default:
                 console.log('Au revoir');
