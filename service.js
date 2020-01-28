@@ -1,19 +1,31 @@
 var presentation = require('./presentation.js');
+var request = require('request');
 function listerClients(callBack) {
-    var request = require('request');
+
     request('https://btoulemonde-hotel-app.herokuapp.com/clients/', { json: true }, function (err, res, data) {
-        
+
         callBack(data);
     });
 }
 function ajouterClient(nom, prenom) {
     
-    var request = require('request');
-    request('https://btoulemonde-hotel-app.herokuapp.com/clients/',{method: 'POST'} ,
-    {body: '{"nom" : nom, "prenoms" : prenom}'},{ json: true }, function (err, res, body) {
-
-     });
+    request.post(
+        'https://btoulemonde-hotel-app.herokuapp.com/clients',
+        {
+            json: {
+                "nom": nom, "prenoms":prenom
+            }
+        },
+        (error, res, body) => {
+            if (error) {
+                console.error(error)
+                return
+            }
+            console.log(`statusCode: ${res.statusCode}`)
+            console.log(body)
+        });
     
 }
+
 exports.ajouterClient = ajouterClient;
 exports.listerClients = listerClients;
