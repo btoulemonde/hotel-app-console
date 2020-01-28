@@ -1,5 +1,7 @@
+var service = require('./service.js');
 function start() {
     console.log('1. Lister les clients'),
+        console.log('2 . Ajouter un client'),
         console.log('99. Sortir')
 
     var readline = require('readline');
@@ -8,17 +10,24 @@ function start() {
         outpt: process.stdout
     })
     rl.question('saisissez un numéro : ', function (saisie) {
-        if (saisie == 1) {
-            console.log('>> Liste des clients');
-            var service = require('./service.js');
-            var libelleService = service.listerClients();
-            start();
-        } else if (saisie == 99) {
-            console.log('Au revoir');
+        switch (saisie) {
+            case '1':
+                console.log('>> Liste des clients');
+                
+                service.listerClients();
+                start();
+                
+            case '2':
 
-            rl.close();
+
+                break;
+            default:
+                console.log('Au revoir');
+
+                rl.close();
+
         }
-    })
+    });
 }
 
 
