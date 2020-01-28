@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts" : {
-    "start" : "node index.js"
+  "scripts": {
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
@@ -16,7 +16,8 @@
   "bugs": {
     "url": "https://github.com/btoulemonde/hotel-app-console/issues"
   },
-  "homepage": "https://github.com/btoulemonde/hotel-app-console#readme"
-  
+  "homepage": "https://github.com/btoulemonde/hotel-app-console#readme",
+  "dependencies": {
+    "request": "^2.88.0"
+  }
 }
-
