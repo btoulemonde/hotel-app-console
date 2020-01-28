@@ -1,22 +1,33 @@
 var service = require('./service.js');
-function start() {
-    console.log('1. Lister les clients'),
-        console.log('2 . Ajouter un client'),
-        console.log('99. Sortir')
+var readline = require('readline');
+var rl = readline.createInterface({
+    input: process.stdin,
+    outpt: process.stdout
+});
 
-    var readline = require('readline');
-    var rl = readline.createInterface({
-        input: process.stdin,
-        outpt: process.stdout
-    })
-    rl.question('saisissez un numéro : ', function (saisie) {
+function startMenu() {
+    var menu = `
+        1. Liste des clients
+        2. Ajouter un client
+        99. Quitter
+        `;
+       console.log(menu);
+    rl.question( function (saisie) {
+        
+        console.log(`Vous avez saisi : ${saisie}`);
+        startMenu();
         switch (saisie) {
             case '1':
                 console.log('>> Liste des clients');
+
+                service.listerClients(function(data){
+                    data.forEach(element => {
+                        console.log(element.nom," ", element.prenoms)
+                    });
+                    startMenu();
+                });
                 
-                service.listerClients();
-                start();
-                
+                break;
             case '2':
 
 
@@ -31,4 +42,4 @@ function start() {
 }
 
 
-exports.start = start;
+exports.startMenu = startMenu;
