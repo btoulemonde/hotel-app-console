@@ -1,9 +1,11 @@
-var service = require('./service.js');
+var serv = require('./service.js');
 var readline = require('readline');
 var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
+const service = new serv.Service;
+
 
 const listerClients = () => {
     service.listerClients()
@@ -36,7 +38,7 @@ const chercherNom = () => {
                 clients.forEach(element => console.log(element.nom, element.prenoms));
                 startMenu();
             })
-            .catch(err => console.log("Erreur =>", err));
+            .catch(err => err);
     });
 }
 const quitter = () => {
