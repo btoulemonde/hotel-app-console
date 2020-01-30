@@ -1,39 +1,25 @@
 var presentation = require('./presentation.js');
 var request = require('request');
-function listerClients(callBack) {
-
-    request('https://btoulemonde-hotel-app.herokuapp.com/clients/', { json: true }, function (err, res, data) {
-
-        callBack(data);
-    });
-}
-function ajouterClient(nom,prenom) {
-    
-    request.post(
-        'https://btoulemonde-hotel-app.herokuapp.com/clients',
-        {
-            json: {
-                "nom": nom, "prenoms":prenom
-            }
-        },
-        (error, res, body) => {
-            if (error) {
-                console.error(error)
-                return
-            }
-            console.log(`statusCode: ${res.statusCode}`)
-            console.log(body)
-            
-        });
-    
+var requestPromise = require('request-promise-native');
+const listerClients = () => {
+    return requestPromise('https://btoulemonde-hotel-app.herokuapp.com/clients/', { json: true })
+        .then(clients => clients);
 }
 
-function chercherNom(nom,callBack){
-    request('https://btoulemonde-hotel-app.herokuapp.com/clients?nom='+nom, { json: true }, function (err, res, data) {
-
-        callBack(data);
-    });
+const ajouterClient = (nom, prenom) => {
+    return requestPromise.post('https://btoulemonde-hotel-app.herokuapp.com/clients/', {
+        json: {
+            "nom": nom, "prenoms": prenom
+        }
+    })
 }
+
+const chercherNom = nom => {
+    return requestPromise(`https://btoulemonde-hotel-app.herokuapp.com/clients?nom=${nom}`, { json: true })
+        .then(clients => clients);
+
+}
+
 
 exports.ajouterClient = ajouterClient;
 exports.listerClients = listerClients;
