@@ -1,4 +1,4 @@
-const presentation = require('./presentation.js');
+const presentation = require('./presentation');
 const request = require('request');
 const requestPromise = require('request-promise-native');
 
@@ -7,14 +7,14 @@ const requestPromise = require('request-promise-native');
 class Service{
     listerClients(){
         return requestPromise('https://btoulemonde-hotel-app.herokuapp.com/clients/', { json: true })
-        .then(clients => clients);
+        .then((clients: any) => clients);
     }
-    chercherNom(nom){
+    chercherNom(nom: any){
         return requestPromise(`https://btoulemonde-hotel-app.herokuapp.com/clients?nom=${nom}`, { json: true })
-            .then(clients => clients)
-            .catch(err => console.log(err))
+            .then((clients: any)=> clients)
+            .catch((err: any) => console.log(err))
     }
-    ajouterClient(nom, prenom){
+    ajouterClient(nom: any, prenom: any){
         return requestPromise.post('https://btoulemonde-hotel-app.herokuapp.com/clients/', {
             json: {
                 "nom": nom, "prenoms": prenom
@@ -22,5 +22,5 @@ class Service{
         })
     }
 }
+export {Service};
 
-exports.Service = Service;

@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js"
+    "start": "ts-node index.ts"
   },
   "repository": {
     "type": "git",
@@ -18,7 +18,13 @@
   },
   "homepage": "https://github.com/btoulemonde/hotel-app-console#readme",
   "dependencies": {
+    "@types/jsdom": "^12.2.4",
+    "@types/node": "^13.5.2",
+    "@types/request-promise-native": "^1.0.17",
     "request": "^2.88.0",
-    "request-promise-native": "^1.0.8"
+    "request-promise-native": "^1.0.8",
+    "ts-node": "^8.6.2",
+    "typerscript": "^0.2.3",
+    "typescript": "^3.7.5"
   }
 }
