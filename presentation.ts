@@ -1,5 +1,6 @@
 import readline from 'readline'
 import * as serv from './service';
+import {Client} from './domains'
 var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -11,7 +12,7 @@ const listerClients = () => {
     service.listerClients()
         .then((clients: any[]) => {
             console.log('>> Liste des clients');
-            clients.forEach((element: { nom: any; prenoms: any; }) => console.log(element.nom, element.prenoms));
+            clients.forEach((element: { nom: any; prenoms: any; }) => console.log(new Client(element.nom, element.prenoms).toString()) );
             startMenu();
         })
         .catch((err: any) => console.log("Erreur =>", err));
@@ -35,7 +36,7 @@ const chercherNom = () => {
         service.chercherNom(nom)
             .then((clients: any[]) => {
                 console.log(`>>liste des clients dont le nom est ${nom}`);
-                clients.forEach((element: { nom: any; prenoms: any; }) => console.log(element.nom, element.prenoms));
+                clients.forEach((element: { nom: any; prenoms: any; }) =>  console.log(new Client(element.nom, element.prenoms).toString()));
                 startMenu();
             })
             .catch((err: any) => err);
