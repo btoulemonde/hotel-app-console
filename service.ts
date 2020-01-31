@@ -1,6 +1,5 @@
-const presentation = require('./presentation');
-const request = require('request');
-const requestPromise = require('request-promise-native');
+import requestPromise from'request-promise-native';
+
 
 
 
