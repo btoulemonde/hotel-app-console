@@ -1,11 +1,11 @@
 import readline from 'readline'
-import * as serv from './service';
+import {Service} from './service';
 import {Client} from './domains'
 var rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
 });
-const service = new serv.Service();
+const service = new Service();
 
 
 const listerClients = () => {
@@ -32,7 +32,7 @@ const ajouterClient = () => {
     });
 }
 const chercherNom = () => {
-    rl.question("Saisissez un nom : ", (nom: any) => {
+    rl.question("Saisissez un nom : ", (nom: String) => {
         service.chercherNom(nom)
             .then((clients: any[]) => {
                 console.log(`>>liste des clients dont le nom est ${nom}`);
